@@ -3,9 +3,23 @@
 
 #define MAX_SIZE 10
 
-bool IsFull(int rear)
+class Queue {
+private:
+	int arr[MAX_SIZE];
+	int f, r;
+public:
+	Queue()
+		:f(-1), r(-1){}
+	bool IsFull();
+	bool IsEmpty();
+	void Print();
+	void Enqueue(int x);
+	void Dequeue();
+};
+
+bool Queue::IsFull()
 {
-	if (rear == MAX_SIZE - 1)
+	if ((r+1)%MAX_SIZE == f) //cirular array, if the array element after rear is == f, the array is full
 	{
 		std::cout << "The queue is full" << std::endl;
 		return true;
@@ -13,7 +27,7 @@ bool IsFull(int rear)
 	return false;
 }
 
-bool IsEmpty(int f, int r)
+bool Queue::IsEmpty()
 {
 	if (f == -1 && r == -1)
 		return true;
@@ -21,40 +35,29 @@ bool IsEmpty(int f, int r)
 	return false;
 }
 
-void Print(int A[])
+void Queue::Enqueue(int x)
 {
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		std::cout << A[i] << " ";
-	}
-	std::cout << "\n";
-}
-
-int* Enqueue(int A[], int f, int r, int x)
-{
-	//if rear is at max index (sizeof(A)-1)
-	//print "queue is full"
-	//if the queue is empty set front and rear to 0
-	//set rear +1, enqueue the data A[rear] = x
-	if ((r + 1) % MAX_SIZE == f)
-		return A;
-	else if (IsEmpty)
+	if (IsFull())
+		return;
+	else if (IsEmpty())
 	{
 		f = 0;
 		r = 0;
 	}
 	else
 	{
-		r = (r + 1) % MAX_SIZE;
+		r = (r + 1) % MAX_SIZE; //set rear as the next element in the circular array
 	}
-	A[r] = x;
-	return A;
+	arr[r] = x; 
+	std::cout << "[INFO] Queued: " << x << std::endl;
+	return;
 }
 
-int* Deqeue(int A[], int f, int r)
+void Queue::Dequeue()
 {
-	if (IsEmpty)
-		return A;
+	std::cout << "[INFO] Dequeuing. " << std::endl;
+	if (IsEmpty())
+		return;
 	else if (r == f)
 	{
 		f = -1;
@@ -63,20 +66,31 @@ int* Deqeue(int A[], int f, int r)
 	else
 		f = (f + 1) % MAX_SIZE;
 
-	return A;
+	return;
+}
+
+void Queue::Print()
+{
+	int count = (r + MAX_SIZE - f) % MAX_SIZE + 1;
+	std::cout << "Queue: ";
+	for (int i = 0; i < count; i++)
+	{
+		int index = (f + i) % MAX_SIZE;
+		std::cout << arr[index] << " ";
+	}
+	std::cout << "\n";
 }
 
 int main()
 {
+	Queue Q;
 	int A[MAX_SIZE];
-	int front = -1;
-	int rear = -1;
-	IsEmpty(front, rear);
-	Enqueue(A, front, rear, 1);
-	Enqueue(A, front, rear, 2);
-	Enqueue(A, front, rear, 3);
-	Enqueue(A, front, rear, 4);
-	Deqeue(A, front, rear);
 
-	Print(A);
+	Q.Enqueue(1);
+	Q.Enqueue(2);
+	Q.Enqueue(3);
+	Q.Enqueue(4);
+	Q.Dequeue();
+
+	Q.Print();
 }

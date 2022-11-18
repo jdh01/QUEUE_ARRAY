@@ -1,4 +1,3 @@
 ﻿  main.cpp
-C:\dev\QUEUE_ARRAY\QUEUE_ARRAY\main.cpp(41,11): warning C4551: function call missing argument list
-C:\dev\QUEUE_ARRAY\QUEUE_ARRAY\main.cpp(56,6): warning C4551: function call missing argument list
+C:\dev\QUEUE_ARRAY\QUEUE_ARRAY\main.cpp(87,6): warning C4101: 'A': unreferenced local variable
   QUEUE_ARRAY.vcxproj -> C:\dev\QUEUE_ARRAY\x64\Debug\QUEUE_ARRAY.exe
